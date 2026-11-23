@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رسالة صغيرة 💌</title>
+<style>
+:root{--bg:#eef3ff;--card:#ffffff;--text:#1f2a4a;--sub:#5a6788;--accent:#4f6ef7;--accent2:#d9e1ff;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121830;--card:#1c2547;--text:#e8edff;--sub:#a9b5de;--accent:#7f96ff;--accent2:#2b3766;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121830;--card:#1c2547;--text:#e8edff;--sub:#a9b5de;--accent:#7f96ff;--accent2:#2b3766;color-scheme:dark}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
+.card{background:var(--card);border-radius:24px;padding:30px 20px;max-width:380px;width:100%;text-align:center;box-shadow:0 10px 40px rgba(79,110,247,.2)}
+.emoji{font-size:50px}
+h1{font-size:23px;margin:12px 0 8px}
+p{color:var(--sub);line-height:1.9;margin:8px 0 18px;font-size:16px}
+button{font-family:inherit;border:0;cursor:pointer}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.yes{background:var(--accent);color:#fff;font-weight:700;font-size:17px;border-radius:14px;padding:13px 22px}
+.no{background:var(--accent2);color:var(--text);font-size:17px;border-radius:14px;padding:13px 22px}
+.opts{display:grid;gap:10px}
+.opt{font-size:17px;border-radius:16px;padding:16px 10px;background:var(--accent2);color:var(--text)}
+.field{text-align:right;margin-bottom:14px}
+.field label{display:block;font-size:14px;color:var(--sub);margin-bottom:6px}
+.field input{width:100%;box-sizing:border-box;font-family:inherit;font-size:18px;padding:13px;border-radius:14px;border:2px solid var(--accent2);background:var(--card);color:var(--text);text-align:center}
+.go{width:100%;background:var(--accent);color:#fff;font-weight:700;font-size:17px;border-radius:14px;padding:14px;opacity:.45}
+.go.ready{opacity:1}
+.sum{background:var(--accent2);border-radius:16px;padding:14px;margin:6px 0 14px;font-weight:700;line-height:1.9}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="card" id="s1">
+  <div class="emoji">💌</div>
+  <h1>رسالة صغيرة ولطيفة</h1>
+  <p>هذي مو رسالة بنك ولا إعلان 😂 آني بس شخص بسيط عنده سؤال صغير، وأتمنى يمرّ بخفة 🌸</p>
+  <div class="btns"><button class="yes" id="go1">كمّلي 🌸</button></div>
+</div>
+
+<div class="card hidden" id="s2">
+  <div class="emoji" id="e2">🙈</div>
+  <h1 id="h2">ممكن نتعرف؟</h1>
+  <p id="p2">وإذا ما تريدين، دوسي لا شكراً وبدون أي زعل، وآني أتقبّل بكل رحابة صدر 🌷</p>
+  <div class="btns">
+    <button class="yes" id="yes">إي، ليش لا 💙</button>
+    <button class="no" id="no">لا، شكراً</button>
+  </div>
+</div>
+
+<div class="card hidden" id="s3">
+  <div class="emoji">📅</div>
+  <h1>اختاري اللي يريّحج</h1>
+  <p>اليوم والساعة اللي تناسبج، وآني أتأقلم وياج 💙</p>
+  <div class="field"><label for="dt">اليوم</label><input type="date" id="dt"></div>
+  <div class="field"><label for="tm">الساعة</label><input type="time" id="tm"></div>
+  <button class="go" id="ok">تمام 💙</button>
+</div>
+
+<div class="card hidden" id="s4">
+  <div class="emoji">🥰</div>
+  <h1>عاشت ايدج!</h1>
+  <p>آني فرحان وخجلان بنفس الوكت 😅 شلون تحبين نبدي؟</p>
+  <div class="opts" id="opts"></div>
+</div>
+
+<div class="card hidden" id="s5">
+  <div class="emoji">🎉</div>
+  <h1>تمام، اتفقنا!</h1>
+  <div class="sum" id="sum"></div>
+  <p>هسه صوّري الشاشة وابعثيها إلي، وآني أعتبرها اتفاقية رسمية 📜😂</p>
+</div>
+
+<div class="card hidden" id="sn">
+  <div class="emoji">🌷</div>
+  <h1>ولا يهمج</h1>
+  <p>شكراً لأنج قريتي، وآسف إذا أزعجتج. أتمنالج يوم حلو.</p>
+</div>
+
+<script>
+var ids=['s1','s2','s3','s4','s5','sn'];
+function show(id){ids.forEach(function(x){document.getElementById(x).classList.toggle('hidden',x!==id)})}
+document.getElementById('go1').addEventListener('click',function(){show('s2')});
+document.getElementById('yes').addEventListener('click',function(){show('s3')});
+
+var tries=0,nmsg=[
+ ['🥺','استني ثانية','آني جاهز أجيبلج وردة وآيس كريم ومعاهم ميم مضحك. بس فكري مرة ثانية؟ 🌹'],
+ ['🤞','آخر محاولة، وعد','إذا جوابج لا، آني أنسحب بكل احترام وأتمنالج يوم حلو 🌷']
+];
+document.getElementById('no').addEventListener('click',function(){
+  if(tries<nmsg.length){
+    var m=nmsg[tries];tries++;
+    document.getElementById('e2').textContent=m[0];
+    document.getElementById('h2').textContent=m[1];
+    document.getElementById('p2').textContent=m[2];
+  }else{show('sn')}
+});
+
+var dt=document.getElementById('dt'),tm=document.getElementById('tm'),ok=document.getElementById('ok');
+try{var n=new Date();dt.min=n.getFullYear()+'-'+('0'+(n.getMonth()+1)).slice(-2)+'-'+('0'+n.getDate()).slice(-2)}catch(e){}
+function chk(){ok.classList.toggle('ready',!!(dt.value&&tm.value))}
+dt.addEventListener('input',chk);tm.addEventListener('input',chk);
+ok.addEventListener('click',function(){if(dt.value&&tm.value)show('s4')});
+
+var items=['💬 نبدي بالرسائل ونتعرف على مهلنا','☕ كهوة بمكان عام وهادئ','🍦 آيس كريم (رشوة لطيفة)'],opts=document.getElementById('opts');
+items.forEach(function(t){
+  var b=document.createElement('button');b.className='opt';b.textContent=t;
+  b.addEventListener('click',function(){
+    var p=dt.value.split('-'),d=p[2]+'/'+p[1]+'/'+p[0];
+    var hm=tm.value.split(':'),h=+hm[0],suf=h<12?'صباحاً':'مساءً',h12=h%12||12;
+    document.getElementById('sum').innerHTML='📅 '+d+'<br>⏰ '+h12+':'+hm[1]+' '+suf+'<br>'+t;
+    show('s5');
+  });
+  opts.appendChild(b);
+});
+</script>
+</body>
+</html>
